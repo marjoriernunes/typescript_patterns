@@ -17,16 +17,13 @@ class Amplifier {
     turnOff() {
         console.log("Amp turning off");
     }
-    setSource(source: string) {
-        console.log("Setting source to" + source);
-    }
     setVolume(volumeLevel: number) {
         console.log("Setting volume to" + volumeLevel);
     }
 }
 
 class Lights {
-    din() {
+    dim() {
         console.log("Lights are dimming");
     }
 }
@@ -58,4 +55,38 @@ class HomeTheatherFacade{
     private lights: Lights;
     private tv: TV;
     private popcorn: PopcornMaker;
+
+    constructor(bluray: BlurayPlayer, amp: Amplifier, lights: Lights, tv: TV, popcorn: PopcornMaker){
+        this.amp = amp;
+        this.bluray = bluray;
+        this.lights = lights;
+        this.tv = tv;
+        this.popcorn = popcorn;
+    }
+    public watchMovie(){
+        this.popcorn.turnOn();
+        this.popcorn.pop();
+        this.lights.dim();
+        this.tv.turnOn();
+        this.amp.on();
+        this.amp.setVolume(11);
+        this.bluray.on();
+        this.bluray.play();
+    }
+
+    public endMovie(){
+        this.popcorn.turnOff();
+        this.amp.turnOff();
+        this.tv.turnOff();
+        this.bluray.turnOff();
+    }
 }
+
+let bluray = new BlurayPlayer();
+let amp = new Amplifier();
+let lights = new Lights();
+let tv = new TV();
+let popcorn = new PopcornMaker();
+
+let hometheather = new HomeTheatherFacade(bluray, amp, lights, tv, popcorn);
+hometheather.watchMovie();
