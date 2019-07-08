@@ -54,13 +54,13 @@ class CancelledOrderState implements State {
         this.order = order;
     }
     public cancelOrder() {
-        throw new Error("Method not implemented.");
+        console.log('Your order has already been cancelled');
     }
     public verifyPayment() {
-        throw new Error("Method not implemented.");
+        console.log('order cancelled, you cannot verify payment');
     }
     public shipOrder() {
-        throw new Error("Method not implemented.");
+        console.log('order cannot ship, it was cancelled');
     }
 }
 
